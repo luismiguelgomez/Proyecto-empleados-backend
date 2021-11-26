@@ -33,48 +33,51 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/cantidad-lista-empleados'
 
 
 Route::get('/cantidad-lista-empleados', 'App\Http\Controllers\EmpleadosController@listar');
+Route::post('/prueba-post', 'App\Http\Controllers\EmpleadosController@create');
+
 
 Route::get('/test-pdf', function(){
     $pdf = App::make('dompdf.wrapper');
     $pdf->loadHTML('
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-<head>
-  <title>Mi primera página con estilo</title>
-  <style type="text/css">
-  body {
-    color: purple;
-    background-color: #d8da3d }
-  </style>
-</head>
+        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+        <html>
+        <head>
+          <title>Mi primera página con estilo</title>
+          <style type="text/css">
+          body {
+            color: purple;
+            background-color: #d8da3d }
+          </style>
+        </head>
 
-<body>
-        <!-- Menú de navegación del sitio -->
-<ul class="navbar">
-  <li><a href="indice.html">Página principal</a>
-  <li><a href="meditaciones.html">Meditaciones</a>
-  <li><a href="ciudad.html">Mi ciudad</a>
-  <li><a href="enlaces.html">Enlaces</a>
-</ul>
+        <body>
+                <!-- Menú de navegación del sitio -->
+        <ul class="navbar">
+          <li><a href="indice.html">Página principal</a>
+          <li><a href="meditaciones.html">Meditaciones</a>
+          <li><a href="ciudad.html">Mi ciudad</a>
+          <li><a href="enlaces.html">Enlaces</a>
+        </ul>
 
-<!-- Contenido principal -->
-<h1>Mi primera página con estilo</h1>
+        <!-- Contenido principal -->
+        <h1>Mi primera página con estilo</h1>
 
-<p>¡Bienvenido a mi primera página con estilo!
+        <p>¡Bienvenido a mi primera página con estilo!
 
-<p>No tiene imágenes, pero tiene estilo.
-También tiene enlaces, aunque no te lleven a
-ningún sitio…
+        <p>No tiene imágenes, pero tiene estilo.
+        También tiene enlaces, aunque no te lleven a
+        ningún sitio…
 
-<p>Debería haber más cosas aquí, pero todavía no sé
-qué poner.
+        <p>Debería haber más cosas aquí, pero todavía no sé
+        qué poner.
 
-<!-- Firma y fecha de la página, ¡sólo por cortesía! -->
-<address>Creada el 5 de abril de 2004<br>
-  por mí mismo.</address>
+        <!-- Firma y fecha de la página, ¡sólo por cortesía! -->
+        <address>Creada el 5 de abril de 2004<br>
+          por mí mismo.</address>
 
-</body>
-</html>');
+        </body>
+        </html>'
+    );
     return $pdf->stream();
     //return $pdf->download();
 
