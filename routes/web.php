@@ -17,9 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/testingto','App\Http\Controllers\EmpleadoController@listar' );
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('formulario', 'App\Http\Controllers\RegisterController@register');
+
+
+Route::middleware(['auth:sanctum', 'verified'])->put('/register-two','App\Http\Controllers\RegisterController@register');
 
 Route::get('/select', function(){
     $primerSelect = DB::select('SELECT * FROM `users`');
