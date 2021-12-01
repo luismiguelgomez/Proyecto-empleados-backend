@@ -16,23 +16,22 @@ class EmpleadoController extends Controller
         foreach($nombresEPS as $nombreEps => $valor){
             array_push($arrayNombres, $valor);
         }
-     
-        
-        
-
-        for ($i=0; $i < $conteoEPS; $i++) { 
-            $nombre;
-            foreach ($arrayNombres as $for){
-                foreach ($for as $clave => $valor){
-                    $nombre = $valor;
-                }    
-            }
-            $consulta = \DB::select('SELECT * FROM `empleado` ORDER BY Nombre_emp ' . $nombre;
+            
+        $arrayConsultaCount = array();
+        foreach ($arrayNombres as $for){
+            foreach ($for as $clave => $valor){
+                $consulta = \DB::select("SELECT COUNT(EPS) FROM `empleado` WHERE EPS= '" .$valor. "';");
+                array_push($arrayConsultaCount, $consulta);
+            }    
         }
+        
+        $response = [
+                'code' => 200,
+                'status' => 'success',
+                'nombresEPS' => $arrayNombres,
+                'empleados' => $arrayConsultaCount,
+        ];
 
-        echo $consulta;
-        
-        
-        
+        return response()->json($response, $response['code']);
     }
 }
