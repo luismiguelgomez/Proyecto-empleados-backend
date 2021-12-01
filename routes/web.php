@@ -17,8 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/frecuencia-eps','App\Http\Controllers\EmpleadoController@listar' );
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+#Mis Rutas
+Route::get('/frecuencia-eps','App\Http\Controllers\EmpleadoController@frecuenciaEps');
+
+Route::get('/frecuencia-pension','App\Http\Controllers\EmpleadoController@frecuenciaPension');
+
+Route::get('/frecuencia-dependencia','App\Http\Controllers\EmpleadoController@frecuenciaDependencia');
+
