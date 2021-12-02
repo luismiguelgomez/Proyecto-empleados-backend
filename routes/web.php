@@ -45,3 +45,8 @@ Route::get('/cantidad-lista-empleados', 'App\Http\Controllers\EmpleadosControlle
 Route::post('/employes', 'App\Http\Controllers\EmpleadosController@listEmployes');
 Route::post('/employes/dependence', 'App\Http\Controllers\EmpleadosController@listbydependence');
 Route::post('/employes/dependence/charge', 'App\Http\Controllers\EmpleadosController@listbycharge');
+
+
+#RUTAS REPORTE INFORMACION PERSONAL
+Route::get('/report-informacion-individual/{nombre}','App\Http\Controllers\InfoPersonalController@reportIndividual');
+Route::get('/report-informacion-todos','App\Http\Controllers\InfoPersonalController@reportTodos');
