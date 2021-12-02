@@ -45,4 +45,3 @@ Route::get('/cantidad-lista-empleados', 'App\Http\Controllers\EmpleadosControlle
 Route::post('/employes', 'App\Http\Controllers\EmpleadosController@listEmployes');
 Route::post('/employes/dependence', 'App\Http\Controllers\EmpleadosController@listbydependence');
 Route::post('/employes/dependence/charge', 'App\Http\Controllers\EmpleadosController@listbycharge');
-Route::post('/countdependence', 'App\Http\Controllers\EmpleadosController@countdependence');
