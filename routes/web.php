@@ -33,8 +33,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/cantidad-lista-empleados'
 
 
 Route::get('/cantidad-lista-empleados', 'App\Http\Controllers\EmpleadosController@listar');
-Route::post('/prueba-post', 'App\Http\Controllers\EmpleadosController@create');
-
+Route::post('/employes', 'App\Http\Controllers\EmpleadosController@listEmployes');
+Route::post('/employes/dependence', 'App\Http\Controllers\EmpleadosController@listbydependence');
+Route::post('/employes/dependence/charge', 'App\Http\Controllers\EmpleadosController@listbycharge');
+Route::post('/countdependence', 'App\Http\Controllers\EmpleadosController@countdependence');
 
 Route::get('/test-pdf', function(){
     $pdf = App::make('dompdf.wrapper');
