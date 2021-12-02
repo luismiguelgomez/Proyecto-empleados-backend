@@ -21,66 +21,21 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/select', function(){
-    $primerSelect = DB::select('SELECT * FROM `users`');
-    return $primerSelect;
-    dd($primerSelect);
-});
 
-/*
-Route::middleware(['auth:sanctum', 'verified'])->get('/cantidad-lista-empleados', 'App\Http\Controllers\EmpleadosController@listar');
-*/
+#Mis Rutas
+Route::get('/frecuencia-eps','App\Http\Controllers\EmpleadoController@frecuenciaEps');
 
+Route::get('/frecuencia-pension','App\Http\Controllers\EmpleadoController@frecuenciaPension');
 
-Route::get('/cantidad-lista-empleados', 'App\Http\Controllers\EmpleadosController@listar');
-Route::post('/employes', 'App\Http\Controllers\EmpleadosController@listEmployes');
-Route::post('/employes/dependence', 'App\Http\Controllers\EmpleadosController@listbydependence');
-Route::post('/employes/dependence/charge', 'App\Http\Controllers\EmpleadosController@listbycharge');
-Route::post('/countdependence', 'App\Http\Controllers\EmpleadosController@countdependence');
+Route::get('/frecuencia-dependencia-EPS','App\Http\Controllers\EmpleadoController@frecuenciaDependenciaEPS');
 
-Route::get('/test-pdf', function(){
-    $pdf = App::make('dompdf.wrapper');
-    $pdf->loadHTML('
-        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-        <html>
-        <head>
-          <title>Mi primera página con estilo</title>
-          <style type="text/css">
-          body {
-            color: purple;
-            background-color: #d8da3d }
-          </style>
-        </head>
+Route::get('/frecuencia-dependencia-ARL','App\Http\Controllers\EmpleadoController@frecuenciaDependenciaARL');
 
-        <body>
-                <!-- Menú de navegación del sitio -->
-        <ul class="navbar">
-          <li><a href="indice.html">Página principal</a>
-          <li><a href="meditaciones.html">Meditaciones</a>
-          <li><a href="ciudad.html">Mi ciudad</a>
-          <li><a href="enlaces.html">Enlaces</a>
-        </ul>
+#Los dos tipos variable pueden ser 'asc' o 'desc'
+Route::get('/orden-por-cargo/{tipo}','App\Http\Controllers\EmpleadoController@ordenarXcargo');
 
-        <!-- Contenido principal -->
-        <h1>Mi primera página con estilo</h1>
+#Los dos tipos variable pueden ser 'asc' o 'desc'
+Route::get('/orden-por-eps/{tipo}','App\Http\Controllers\EmpleadoController@ordenarXeps');
 
-        <p>¡Bienvenido a mi primera página con estilo!
-
-        <p>No tiene imágenes, pero tiene estilo.
-        También tiene enlaces, aunque no te lleven a
-        ningún sitio…
-
-        <p>Debería haber más cosas aquí, pero todavía no sé
-        qué poner.
-
-        <!-- Firma y fecha de la página, ¡sólo por cortesía! -->
-        <address>Creada el 5 de abril de 2004<br>
-          por mí mismo.</address>
-
-        </body>
-        </html>'
-    );
-    return $pdf->stream();
-    //return $pdf->download();
-
-});
+#Los dos tipos variable pueden ser 'asc' o 'desc'
+Route::get('/orden-por-pension/{tipo}','App\Http\Controllers\EmpleadoController@ordenarXfondoPension');
