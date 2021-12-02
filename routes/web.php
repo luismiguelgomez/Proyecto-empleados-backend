@@ -22,7 +22,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-#Mis Rutas
+#Rutas reporte salud y pension
 Route::get('/frecuencia-eps','App\Http\Controllers\EmpleadoController@frecuenciaEps');
 
 Route::get('/frecuencia-pension','App\Http\Controllers\EmpleadoController@frecuenciaPension');
@@ -39,3 +39,10 @@ Route::get('/orden-por-eps/{tipo}','App\Http\Controllers\EmpleadoController@orde
 
 #Los dos tipos variable pueden ser 'asc' o 'desc'
 Route::get('/orden-por-pension/{tipo}','App\Http\Controllers\EmpleadoController@ordenarXfondoPension');
+
+#Rutas reporte nomina
+Route::get('/cantidad-lista-empleados', 'App\Http\Controllers\EmpleadosController@listar');
+Route::post('/employes', 'App\Http\Controllers\EmpleadosController@listEmployes');
+Route::post('/employes/dependence', 'App\Http\Controllers\EmpleadosController@listbydependence');
+Route::post('/employes/dependence/charge', 'App\Http\Controllers\EmpleadosController@listbycharge');
+Route::post('/countdependence', 'App\Http\Controllers\EmpleadosController@countdependence');
