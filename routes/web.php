@@ -50,3 +50,6 @@ Route::post('/employes/dependence/charge', 'App\Http\Controllers\EmpleadosContro
 #RUTAS REPORTE INFORMACION PERSONAL
 Route::get('/report-informacion-individual/{nombre}','App\Http\Controllers\InfoPersonalController@reportIndividual');
 Route::get('/report-informacion-todos','App\Http\Controllers\InfoPersonalController@reportTodos');
+
+#RUTAS IMPORTAR DATOS DEL EXCEL
+Route::post('/importar-excel', 'App\Http\Controllers\cargarDatosController@importExcel')->name('empleado.excel');
