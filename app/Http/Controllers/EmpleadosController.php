@@ -7,67 +7,81 @@ use Illuminate\Http\Response;
 
 class EmpleadosController extends Controller
 {
-    public function listar() {
+    public function listar()
+    {
         $empleados = \DB::select('SELECT * FROM empleado');
         //return $empleados;
 
         $data = [
-                'code' => 200,
-                'status' => 'success',
-                'empleados' => $empleados,
+            'code' => 200,
+            'status' => 'success',
+            'empleados' => $empleados,
         ];
 
         //Devolver la respuesta
         return response()->json($data, $data['code']);
     }
-    public function listEmployes(Request $request) {
+
+    public function listEmployes(Request $request)
+    {
+
         $json = $request->input('json', null);
+
         $params_array = json_decode($json, true);
-        echo $params_array['orden'];
-        
-        $datosEmp = \DB::select('SELECT * FROM `empleado` ORDER BY Nombre_emp '. $params_array['orden']);
-        
-        return $datosEmp;
-    }
-    public function listbydependence(Request $request) {
-        $json = $request->input('json', null);
-        $params_array = json_decode($json, true);
-        echo $params_array['orden'];
-        
-        $datosEmp = \DB::select('SELECT * FROM `empleado`,`dependencia` ORDER BY nombre_dep asc, Nombre_emp '. $params_array['orden']);
-        
+
+        $datosEmp = \DB::select('SELECT Nombre_emp, Cargo, Fecha_ingreso, EPS, ARL, Fondo_pension, Sueldo, nombre_dep
+        FROM empleado INNER JOIN dependencia ON empleado.id_dep=dependencia.id_dep ORDER BY Nombre_emp ' . $params_array['orden']);
+
         return $datosEmp;
     }
 
-    public function listbycharge(Request $request) {
+    public function listbydependence(Request $request)
+    {
+
         $json = $request->input('json', null);
+
         $params_array = json_decode($json, true);
-        echo $params_array['orden'];
-        
-        $datosEmp = \DB::select('SELECT * FROM `empleado`,`dependencia` ORDER BY Cargo asc,  nombre_dep asc, Nombre_emp '. $params_array['orden']);
-        
+
+        $datosEmp = \DB::select('SELECT Nombre_emp, Cargo, Fecha_ingreso, EPS, ARL, Fondo_pension, Sueldo, nombre_dep
+        FROM empleado INNER JOIN dependencia ON empleado.id_dep=dependencia.id_dep ORDER BY nombre_dep asc, Nombre_emp ' . $params_array['orden']);
+
         return $datosEmp;
     }
 
-    public function novedadesnormal(Request $request) {
+    public function listbycharge(Request $request)
+    {
+
         $json = $request->input('json', null);
+
         $params_array = json_decode($json, true);
-        $datosEmp = \DB::select("SELECT * FROM `empleado` WHERE fecha_actualizacion BETWEEN '" . $params_array['desde'] . "' AND '" . $params_array['hasta'] ."'");
+
+        $datosEmp = \DB::select('SELECT Nombre_emp, Cargo, Fecha_ingreso, EPS, ARL, Fondo_pension, Sueldo, nombre_dep
+        FROM empleado INNER JOIN dependencia ON empleado.id_dep=dependencia.id_dep ORDER BY Cargo asc, nombre_dep asc, Nombre_emp ' . $params_array['orden']);
+
         return $datosEmp;
     }
 
-    public function novedadescargodependencia(Request $request) {
+    public function novedadesnormal(Request $request)
+    {
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
-        $datosEmp = \DB::select("SELECT * FROM `empleado` WHERE fecha_actualizacion BETWEEN '" . $params_array['desde'] . "' AND '" . $params_array['hasta'] . "'ORDER BY id_dep asc , Cargo asc" );
+        $datosEmp = \DB::select("SELECT * FROM `empleado` WHERE fecha_actualizacion BETWEEN '" . $params_array['desde'] . "' AND '" . $params_array['hasta'] . "'");
         return $datosEmp;
     }
 
-    public function novedadesdetalles(Request $request) {
+    public function novedadescargodependencia(Request $request)
+    {
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
-        $datosEmp = \DB::select("SELECT * FROM `novedad` INNER JOIN `empleado` ON novedad.codigo_emp=empleado.Codigo" );
+        $datosEmp = \DB::select("SELECT * FROM `empleado` WHERE fecha_actualizacion BETWEEN '" . $params_array['desde'] . "' AND '" . $params_array['hasta'] . "'ORDER BY id_dep asc , Cargo asc");
         return $datosEmp;
     }
 
+    public function novedadesdetalles(Request $request)
+    {
+        $json = $request->input('json', null);
+        $params_array = json_decode($json, true);
+        $datosEmp = \DB::select("SELECT * FROM `novedad` INNER JOIN `empleado` ON novedad.codigo_emp=empleado.Codigo");
+        return $datosEmp;
+    }
 }
