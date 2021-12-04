@@ -46,6 +46,10 @@ Route::post('/employes', 'App\Http\Controllers\EmpleadosController@listEmployes'
 Route::post('/employes/dependence', 'App\Http\Controllers\EmpleadosController@listbydependence');
 Route::post('/employes/dependence/charge', 'App\Http\Controllers\EmpleadosController@listbycharge');
 
+#Rutas de Novedades
+Route::post('/novedadesempleados', 'App\Http\Controllers\EmpleadosController@novedadesnormal');
+Route::post('/novedadesempleados/dependenciacargo', 'App\Http\Controllers\EmpleadosController@novedadescargodependencia');
+Route::post('/novedadesempleados/detalles', 'App\Http\Controllers\EmpleadosController@novedadesdetalles');
 
 #RUTAS REPORTE INFORMACION PERSONAL
 Route::get('/report-informacion-individual/{nombre}','App\Http\Controllers\InfoPersonalController@reportIndividual');

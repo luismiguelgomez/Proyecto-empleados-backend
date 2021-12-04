@@ -49,10 +49,25 @@ class EmpleadosController extends Controller
         return $datosEmp;
     }
 
-    public function countdependence(Request $request) {
-
-        $datosEmp = \DB::select('SELECT `nombre_dep`,`id_dep` from `dependencia`,`empleado` where `id_dep`');
+    public function novedadesnormal(Request $request) {
+        $json = $request->input('json', null);
+        $params_array = json_decode($json, true);
+        $datosEmp = \DB::select("SELECT * FROM `empleado` WHERE fecha_actualizacion BETWEEN '" . $params_array['desde'] . "' AND '" . $params_array['hasta'] ."'");
         return $datosEmp;
-        
     }
+
+    public function novedadescargodependencia(Request $request) {
+        $json = $request->input('json', null);
+        $params_array = json_decode($json, true);
+        $datosEmp = \DB::select("SELECT * FROM `empleado` WHERE fecha_actualizacion BETWEEN '" . $params_array['desde'] . "' AND '" . $params_array['hasta'] . "'ORDER BY id_dep asc , Cargo asc" );
+        return $datosEmp;
+    }
+
+    public function novedadesdetalles(Request $request) {
+        $json = $request->input('json', null);
+        $params_array = json_decode($json, true);
+        $datosEmp = \DB::select("SELECT * FROM `novedad` INNER JOIN `empleado` ON novedad.codigo_emp=empleado.Codigo" );
+        return $datosEmp;
+    }
+
 }
